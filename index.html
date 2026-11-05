@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4b740">
+  <title>SAMORAQ — Learn Smarter. Grow Stronger.</title>
+  <meta name="description" content="Plan smarter, study consistently, and turn your academic goals into progress with SAMORAQ.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{--sf-purple:#f4b740;--sf-ink:#17182d;--sf-muted:#777b98}
+    body{margin:0;background:#fafaff;color:var(--sf-ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .landing-nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1240px;margin:auto;padding:0 30px}
+    .landing-brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;font-weight:900;letter-spacing:-.6px}
+    .landing-brand .brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#f4b740,#ffd071);color:#fff;font-size:21px;box-shadow:0 8px 20px #f4b74033}
+    .landing-brand small{display:block;font-size:9px;letter-spacing:2px;color:#8b8da7;margin-top:3px}
+    .landing-links{display:flex;align-items:center;gap:26px}
+    .landing-links a{color:#595c77;text-decoration:none;font-weight:700;font-size:13px}
+    .landing-links a:hover{color:var(--sf-purple)}
+    .landing-links .login-link{color:#fff;background:var(--sf-purple);padding:12px 18px;border-radius:12px;box-shadow:0 7px 18px #f4b74033}
+    .landing-links .login-link:hover{color:#fff;background:#6454e8}
+    .hero{position:relative;isolation:isolate;overflow:hidden;min-height:660px;display:grid;place-items:center;padding:70px 24px 85px;text-align:center}
+    .hero:before,.hero:after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none}
+    .hero:before{width:520px;height:520px;top:-190px;left:-130px;background:radial-gradient(circle,#e5e1ff 0,transparent 70%)}
+    .hero:after{width:620px;height:620px;bottom:-330px;right:-130px;background:radial-gradient(circle,#d9f7f1 0,transparent 70%)}
+    .hero-inner{max-width:850px}
+    .samoraq-hero-logo{display:block;width:min(310px,72vw);height:auto;margin:0 auto 18px;border-radius:16px;box-shadow:0 18px 48px #0008}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:99px;background:#efedff;color:#6555e9;font-size:11px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
+    .eyebrow i{width:7px;height:7px;border-radius:50%;background:#f4b740;box-shadow:0 0 0 4px #f4b7401a}
+    .hero h1{font-size:clamp(46px,8vw,86px);letter-spacing:-.075em;line-height:.99;margin:26px 0 18px;font-weight:900}
+    .hero h1 span{background:linear-gradient(100deg,#f4b740,#d69a2c 55%,#ffd071);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .motto{font-size:clamp(17px,2.4vw,23px);font-weight:800;color:#555a78;margin:0 0 16px}
+    .hero-copy{max-width:650px;margin:0 auto;color:#777b98;font-size:16px;line-height:1.8}
+    .hero-actions{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 21px;border-radius:13px;text-decoration:none;font-weight:850;font-size:13px;transition:transform .18s,box-shadow .18s}
+    .cta:hover{transform:translateY(-2px)}
+    .cta-primary{background:#f4b740;color:#fff;box-shadow:0 12px 28px #f4b74040}
+    .cta-secondary{background:#fff;color:#555a78;border:1px solid #e7e6f5}
+    .hero-stats{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:48px;color:#8588a2;font-size:12px}
+    .hero-stats strong{color:#393c59}
+    .feature-strip{max-width:1100px;margin:-10px auto 80px;padding:0 24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .feature{padding:23px;border:1px solid #e9e8f5;border-radius:19px;background:#fff;box-shadow:0 10px 30px #29254a06}
+    .feature-icon{width:43px;height:43px;display:grid;place-items:center;background:#f0eeff;border-radius:13px;font-size:21px;margin-bottom:15px}
+    .feature h2{font-size:16px;margin:0 0 8px}
+    .feature p{font-size:13px;color:#777b98;line-height:1.7;margin:0}
+    .landing-footer{max-width:1100px;margin:0 auto;padding:24px;border-top:1px solid #eae9f4;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:#8a8da5;font-size:11px}
+    .landing-footer a{color:#777b98;text-decoration:none}
+    @media(max-width:760px){.landing-nav{height:auto;min-height:75px;padding:16px 18px;align-items:flex-start}.landing-links{gap:10px;flex-wrap:wrap;justify-content:flex-end}.landing-links a{font-size:11px}.landing-links .login-link{padding:10px 12px}.hero{min-height:570px;padding:55px 18px 75px}.feature-strip{grid-template-columns:1fr;margin-bottom:50px}.landing-brand{font-size:14px}.landing-brand .brand-mark{width:36px;height:36px}}
+    @media(max-width:430px){.landing-nav{flex-direction:column;align-items:center}.landing-links{justify-content:center}.hero h1{font-size:48px}}
+  </style>
+<style>
+body{background:#080c22;color:#f3f5ff}.landing-nav{background:#090f2a;border-bottom:1px solid #26376c}.landing-brand,.landing-links a{color:#eaf0ff}.landing-brand small{color:#91a3d9}.hero{background:radial-gradient(ellipse at 50% 35%,#1b2c70 0,transparent 58%)}.hero:before{background:radial-gradient(circle,#2454a8 0,transparent 70%)}.hero:after{background:radial-gradient(circle,#532a91 0,transparent 70%)}.hero h1{color:#f7f8ff}.motto{color:#c5d2f5}.hero-copy,.hero-stats{color:#aab8e3}.hero-stats strong{color:#f4f6ff}.eyebrow{background:#172653;color:#7dd3fc}.feature{background:linear-gradient(145deg,#141d45,#0e1534);border-color:#293b72;box-shadow:0 14px 42px #02061766}.feature h2{color:#f4f6ff}.feature p{color:#aab8e3}.cta-secondary{background:#111b43;color:#eaf0ff;border-color:#34477e}.landing-footer{border-color:#29376d;color:#91a3d9}.landing-footer a{color:#aab8e3}#pricing{color:#f3f5ff}#pricing p{color:#aab8e3!important}
+</style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="landing-page">
+  <header class="landing-nav">
+    <a class="landing-brand" href="index.html"><span class="brand-mark">S</span><span>SAMORAQ<small>LEARN SMARTER. GROW STRONGER.</small></span></a>
+    <nav class="landing-links" aria-label="Main navigation">
+      <a href="#pricing">Pricing</a>
+      <a href="credits.html">Credits</a>
+      <a href="#about">About</a>
+      <a class="login-link" href="auth.html">Log in / Sign up ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <img class="samoraq-hero-logo" src="assets/samoraq-logo.png" alt="SAMORAQ — Learn Smarter. Grow Stronger." width="1536" height="1024">
+        <div class="eyebrow"><i></i> Your next chapter starts here</div>
+        <h1>Build your <span>future.</span></h1>
+        <p class="motto">LEARN SMARTER. GROW STRONGER.</p>
+        <p class="hero-copy">A study space designed to turn academic goals into clear daily actions. Organise your subjects, build better study habits, and watch your progress take shape—one task at a time.</p>
+        <div class="hero-actions">
+          <a class="cta cta-primary" href="auth.html">Start your study quest <span>→</span></a>
+          <a class="cta cta-secondary" href="#about">Explore SAMORAQ</a>
+        </div>
+        <div class="hero-stats"><span><strong>Plan</strong> your day</span><span><strong>Track</strong> your progress</span><span><strong>Celebrate</strong> consistency</span></div>
+      </div>
+    </section>
+
+    <section class="feature-strip" id="about">
+      <article class="feature"><div class="feature-icon">✦</div><h2>Your goals, organised</h2><p>Bring subjects, deadlines, and study tasks into one clear workspace.</p></article>
+      <article class="feature"><div class="feature-icon">◷</div><h2>A plan that fits you</h2><p>Start with your class, subjects, exam goals, and daily available time.</p></article>
+      <article class="feature"><div class="feature-icon">↗</div><h2>Progress you can see</h2><p>Track completed work, earn XP, and build consistency over time.</p></article>
+    </section>
+
+    <section id="pricing" style="max-width:1050px;margin:0 auto 65px;padding:0 24px;text-align:center">
+      <div class="eyebrow">Simple start</div><h2 style="font-size:clamp(26px,4vw,38px);letter-spacing:-1px;margin:16px 0 8px">Start free. Build momentum.</h2><p style="color:#777b98;line-height:1.7;margin:0 auto;max-width:600px">SAMORAQ is free to use. This build stores your account and study progress in this browser on this device; cloud accounts and cross-device sync are not available yet.</p>
+    </section>
+  </main>
+
+  <footer class="landing-footer"><span>© SAMORAQ · Plan · Learn · Achieve</span><span><a href="credits.html">Credits &amp; Bio</a> · Built to help students move forward.</span></footer>
+</body>
+
+</html>
