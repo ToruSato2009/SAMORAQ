@@ -1,0 +1,26 @@
+SAMORAQ — NEXUS Guided Walkthrough
+
+Modified files:
+- auth.js: newly created student profiles now include has_completed_tour: false.
+- app.js: guided, spotlight-style walkthrough; Back/Next/Skip; Supabase completion persistence; Settings replay action.
+- dashboard.html: adds the Replay NEXUS Walkthrough control in Settings.
+- theme.css: responsive overlay, spotlight, and NEXUS dialogue styling.
+
+Database:
+No SQL migration is required. The existing public.student_profiles.profile JSONB column stores has_completed_tour. Existing RLS already permits authenticated users to update their own profile row. No policies or keys were changed.
+
+Behavior:
+- Only profiles explicitly carrying has_completed_tour=false automatically launch the tour.
+- Profiles without the field are treated as existing/returning users and do not auto-launch.
+- Finish and Skip both update only the profile JSON flag to true through the authenticated Supabase client.
+- A failed save leaves the tour open and displays an error so completion is not falsely recorded.
+- Replay is available in Settings and does not reset planner state, tasks, XP, or achievements.
+
+Tour sequence: Welcome, Dashboard, My tasks/quests, Subjects, Achievements/XP, Progress reports, Study calendar. Credits & Founder is not included.
+
+Validation performed:
+- Node syntax checks passed for app.js and auth.js.
+- HTML parser checks passed for dashboard.html and auth.html.
+- Static assertions passed for the new-user default, replay control, Supabase profile update, and Credits exclusion.
+- This package has not been exercised in a real browser session or against the live Supabase project. Please test a fresh test account and a returning account before deploying to the live site.
+Daily planner update: automatic generation now creates one task per selected subject, not repeated copies of the same subject/topic. The daily budget is distributed across those subject tasks, and the existing priority-based rebalance adjusts durations to fit the planned study time. Existing already-generated tasks are not automatically renamed or deleted.

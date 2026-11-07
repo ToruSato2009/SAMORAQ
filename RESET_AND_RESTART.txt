@@ -1,0 +1,28 @@
+SAMORAQ V2 — CLEAN RESET & RESTART
+
+WHY THIS UPDATE EXISTS
+The previous build loaded auth.js on the dashboard as well as on the login page. That could create competing redirects. The dashboard now uses only app.js, which validates the active local account before initializing. The auth page handles login/onboarding only.
+
+IMPORTANT: A full reset permanently removes this browser's local SAMORAQ accounts, passwords, profiles, subjects, topics, tasks, XP, schedules, and theme preferences.
+
+TO CLEAR THE OLD LOCAL DATA
+1. Open the old SAMORAQ page in the same browser and on the same address/origin you used before.
+2. Press F12 and open Console.
+3. Type exactly: localStorage.clear()
+4. Press Enter. This clears Local Storage for the current site origin. It does not clear other websites' storage.
+5. Close the old tabs.
+6. Extract this updated ZIP into a NEW folder.
+7. Open the new folder and launch SAMORAQ using RUN_SAMORAQ.bat (or the same local server method you normally use).
+8. Create a fresh account and complete onboarding.
+
+If DevTools blocks pasting, type the command manually. Do not paste any code that you do not understand.
+
+WHAT WAS FIXED
+- auth.js now runs its login/onboarding controller only on auth.html.
+- dashboard.html no longer loads auth.js.
+- app.js validates the active account and saved planner state before initializing the dashboard.
+- Invalid or missing sessions are cleared and redirected to auth.html once; guest planner data is not initialized.
+- Login page validates an existing session before redirecting to dashboard.
+
+DATA NOTE
+This is still a local on-device version. Data is not synced to Supabase or another device. The full reset cannot be undone unless you previously exported a backup.

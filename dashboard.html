@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4b740">
+  <title>SAMORAQ — Make progress visible</title>
+  <meta name="description" content="A gamified study planner that turns study tasks into visible progress.">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="dashboard-page dark">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand samoraq-sidebar-brand" href="index.html" aria-label="SAMORAQ home">
+        <img src="assets/samoraq-logo.png" alt="SAMORAQ — Learn Smarter. Grow Stronger." width="1536" height="1024">
+      </a>
+      <div class="profile-mini">
+        <div class="avatar">SQ</div>
+        <div><strong>My Study Space</strong><span>Level up, one task at a time</span></div>
+      </div>
+      <button class="nav-item logout-item" id="logoutButton" type="button"><span>⇥</span> Log out</button>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-view="tasks"><span>☑</span> My tasks <b id="navTaskCount">0</b></button>
+        <button class="nav-item" data-view="subjects"><span>▤</span> Subjects</button>
+        <button class="nav-item" data-view="calendar"><span>▦</span> Study calendar</button>
+        <button class="nav-item" data-view="achievements"><span>♜</span> Achievements</button>
+        <button class="nav-item" data-view="reports"><span>◔</span> Progress reports</button>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+        <a class="nav-item" href="credits.html" style="text-decoration:none"><span>✦</span> Credits &amp; Founder</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="quest-card">
+          <span class="quest-kicker">TODAY'S QUEST</span>
+          <strong id="sideQuest">Start your first task</strong>
+          <div class="quest-track"><span id="sideQuestBar"></span></div>
+          <small id="sideQuestText">Every small step counts.</small>
+        </div>
+        <button class="nav-item" id="resetData"><span>↻</span> Reset study data</button>
+        <div class="sidebar-footer">V2.0 · FREE STUDY PLANNER</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><span>MY SPACE</span><i>/</i><strong id="viewCrumb">Dashboard</strong></div>
+        <div class="top-actions">
+          <div class="date-chip"><span class="status-dot"></span><span id="todayDate"></span></div>
+          <button class="icon-button" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">◐</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="spark">✦</span> YOUR NEXT LEVEL STARTS HERE</div>
+            <h1>Make today <span class="gradient-text">count.</span></h1>
+            <p class="subheading">Small steps. Real progress. Your own pace.</p>
+          </div>
+          <button class="primary-button" id="quickAdd"><span>＋</span> Add a topic</button>
+        </div>
+
+        <div class="hero-grid">
+          <article class="level-card panel">
+            <div class="level-card-top"><span class="card-label">YOUR JOURNEY</span><span class="level-pill" id="levelPill">LEVEL 1</span></div>
+            <div class="level-main">
+              <div><div class="level-number" id="levelNumber">01</div><div class="level-caption">Curious Beginner</div></div>
+              <div class="orb-wrap"><div class="orb"><span>✦</span></div><i class="orb-ring ring-one"></i><i class="orb-ring ring-two"></i></div>
+            </div>
+            <div class="xp-line"><span><b id="totalXp">0</b> XP earned</span><span><b id="nextXp">100</b> XP to next level</span></div>
+            <div class="xp-track"><span id="xpBar"></span></div>
+            <div class="level-foot"><span>Consistency beats perfection.</span><span id="levelProgress">0%</span></div>
+          </article>
+          <article class="focus-card panel">
+            <div class="focus-header"><span class="card-label">TODAY'S FOCUS</span><span class="focus-icon">✧</span></div>
+            <h2 id="focusPercent">0<span>%</span></h2>
+            <p>of today's tasks completed</p>
+            <div class="focus-ring-wrap"><div class="focus-ring" id="focusRing"><div><strong id="focusDone">0/0</strong><small>tasks done</small></div></div></div>
+            <div class="focus-footer"><span class="tiny-dot"></span><span id="focusMessage">Your first win is waiting.</span></div>
+          </article>
+        </div>
+
+        <div class="schedule-notice" id="scheduleNotice" role="status"></div>
+        <div class="section-heading"><div><h2>Today's missions</h2><p>Choose a task. Finish a task. Earn your XP.</p></div><button class="text-button" data-goto="tasks">View all tasks <span>→</span></button></div>
+        <div class="task-list panel" id="todayTasks"></div>
+
+        <div class="lower-grid">
+          <article class="panel weekly-panel">
+            <div class="panel-heading"><div><h3>Your consistency</h3><p>Completed tasks over the last 7 days</p></div><span class="mini-badge">7 DAYS</span></div>
+            <div class="week-chart" id="weekChart"></div>
+          </article>
+          <article class="panel subject-panel">
+            <div class="panel-heading"><div><h3>Subject progress</h3><p>Completion across your subjects</p></div><button class="small-link" data-goto="subjects">Manage →</button></div>
+            <div id="subjectProgress"></div>
+          </article>
+        </div>
+        <div class="quote-strip"><span>✦</span><div><strong>Progress isn't about perfect days.</strong><p>It's about coming back and taking the next step.</p></div><span class="quote-spark">✧</span></div>
+      </section>
+
+      <section class="view" id="view-tasks">
+        <div class="page-title-row"><div><div class="eyebrow">YOUR ACTION PLAN</div><h1>My <span class="gradient-text">tasks.</span></h1><p class="subheading">Turn the plan into progress.</p></div><button class="primary-button" id="addTaskBtn">＋ New task</button></div>
+        <div class="filter-row panel">
+          <div class="filter-tabs" id="taskFilters"><button class="filter active" data-filter="all">All tasks</button><button class="filter" data-filter="today">Due today</button><button class="filter" data-filter="open">In progress</button><button class="filter" data-filter="done">Completed</button></div>
+          <div class="task-count-label" id="taskCountLabel">0 tasks</div>
+        </div>
+        <div class="task-list panel" id="allTasks"></div>
+      </section>
+
+      <section class="view" id="view-subjects">
+        <div class="page-title-row"><div><div class="eyebrow">ORGANISE YOUR LEARNING</div><h1>Your <span class="gradient-text">subjects.</span></h1><p class="subheading">Keep your learning journey in one place.</p></div><button class="primary-button" id="addSubjectBtn">＋ Add subject</button></div>
+        <div class="daily-time-summary panel" id="dailyTimeSummary"></div>
+        <div class="daily-topic-toolbar"><button class="secondary-button" type="button" data-open-daily-topics>✦ Choose today’s topics</button></div>
+        <div class="priority-notice" id="priorityNotice"><div class="priority-notice-icon">↗</div><div class="priority-notice-copy"><strong>Set your Priority order now, for maximum study output.</strong><span>Choose which subjects should receive more of your daily study time. You can change this anytime.</span></div><button class="primary-button" id="openPriority">Set priorities</button></div>
+        <div class="subject-grid" id="subjectGrid"></div>
+      </section>
+
+      <section class="view" id="view-calendar">
+        <div class="page-title-row"><div><div class="eyebrow">PLAN WITH PURPOSE</div><h1>Study <span class="gradient-text">calendar.</span></h1><p class="subheading">A clear view of what's coming up.</p></div><button class="primary-button" id="calendarAdd">＋ Add task</button></div>
+        <div class="calendar-panel panel"><div class="calendar-header"><button class="icon-button" id="prevMonth">‹</button><h2 id="monthLabel"></h2><button class="icon-button" id="nextMonth">›</button></div><div class="calendar-grid" id="calendarGrid"></div></div>
+        <div class="section-heading"><div><h2>Upcoming tasks</h2><p>Stay ahead of your deadlines.</p></div></div>
+        <div class="task-list panel" id="upcomingTasks"></div>
+      </section>
+
+      <section class="view" id="view-achievements">
+        <div class="page-title-row"><div><div class="eyebrow">CELEBRATE THE SMALL WINS</div><h1>Your <span class="gradient-text">achievements.</span></h1><p class="subheading">Every completed task adds to your story.</p></div></div>
+        <div class="achievement-summary panel"><div class="achievement-medal">✦</div><div><div class="card-label">TOTAL XP EARNED</div><strong id="achievementXp">0 XP</strong><p>Keep showing up. Your progress adds up.</p></div></div>
+        <div class="achievement-grid" id="achievementGrid"></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="page-title-row"><div><div class="eyebrow">YOUR STUDY SPACE</div><h1>Settings <span class="gradient-text">& profile.</span></h1><p class="subheading">Manage your study profile and planner preferences.</p></div></div>
+        <div class="panel" style="padding:24px;display:grid;gap:16px;max-width:760px">
+          <div><span class="card-label">STUDENT PROFILE</span><h2 id="settingsName">Student</h2><p id="settingsBoard">Board · Class</p></div>
+          <div class="daily-time-summary" id="settingsDailyBudget"><div><span class="card-label">DAILY STUDY BUDGET</span><strong id="settingsHours">—</strong><small>One total daily time allowance</small></div><button class="primary-button" data-edit-daily-budget>Change daily hours</button></div>
+          <div><strong>NEXUS walkthrough</strong><p>Need a refresher? NEXUS can guide you around SAMORAQ again without changing your study data.</p><button class="secondary-button" id="replayNexusTour" type="button">Replay NEXUS Walkthrough</button></div>
+          <div><strong>Appearance</strong><p>Use the moon/sun control in the top bar to switch the interface theme.</p></div>
+          <div><strong>Data & privacy</strong><p>This version stores your account and planner data in this browser on this device. Cloud sync is not connected. Clearing browser site data may erase your planner.</p></div>
+          <div><strong>Reset planner</strong><p>Clear your subjects, topics, tasks and progress while keeping your local account.</p><button class="secondary-button" id="settingsReset">Reset planner data</button></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-reports">
+        <div class="page-title-row"><div><div class="eyebrow">REFLECT AND IMPROVE</div><h1>Progress <span class="gradient-text">reports.</span></h1><p class="subheading">See your effort, patterns and next steps.</p></div></div>
+        <div class="stats-grid" id="reportStats"></div>
+        <div class="lower-grid reports-grid"><article class="panel weekly-panel"><div class="panel-heading"><div><h3>7-day activity</h3><p>Completed tasks by day</p></div></div><div class="week-chart tall-chart" id="reportChart"></div></article><article class="panel weekly-panel"><div class="panel-heading"><div><h3>Subject breakdown</h3><p>Completed vs. planned</p></div></div><div id="reportSubjects"></div></article></div>
+        <div class="panel report-note"><strong>Remember</strong><p>These reports measure your planner activity, not your intelligence or worth. Use them to adjust your plan—not to judge yourself.</p></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="taskModal" aria-hidden="true">
+    <form class="modal panel" id="taskForm">
+      <div class="modal-heading"><div><div class="eyebrow">MAKE A PLAN</div><h2 id="taskModalTitle">Add a study task</h2></div><button type="button" class="icon-button close-modal" aria-label="Close">×</button></div>
+      <label>Task name<input name="title" required maxlength="100" placeholder="e.g. Practise integration questions"></label>
+      <div class="form-row"><label>Subject<select name="subject" id="taskSubject" required></select></label><label>Due date<input name="dueDate" type="date" required></label></div>
+      <div class="form-row"><label>Difficulty<select name="difficulty"><option value="easy">Easy · 10 XP</option><option value="medium" selected>Medium · 25 XP</option><option value="hard">Hard · 40 XP</option><option value="boss">Boss task · 60 XP</option></select></label><label>Estimated time (minutes)<input name="minutes" type="number" min="1" max="600" step="1" value="25" required></label></div>
+      <label>Task type<select name="kind"><option value="study">Study / learn</option><option value="practice">Question practice</option><option value="revision">Revision</option><option value="assignment">Assignment / homework</option><option value="test">Mock test / assessment</option></select></label>
+      <label>Notes <span class="optional">(optional)</span><textarea name="notes" rows="2" maxlength="240" placeholder="What does finishing this task look like?"></textarea></label>
+      <div class="reward-preview"><span>✦</span><div><strong id="rewardPreview">You'll earn 25 XP</strong><small>Earn rewards by completing real work.</small></div></div>
+      <div class="modal-actions"><button type="button" class="secondary-button close-modal">Cancel</button><button type="submit" class="primary-button">Save task <span>→</span></button></div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="subjectModal" aria-hidden="true">
+    <form class="modal panel" id="subjectForm">
+      <div class="modal-heading"><div><div class="eyebrow">BUILD YOUR STUDY SPACE</div><h2 id="subjectModalTitle">Add a subject</h2></div><button type="button" class="icon-button close-modal" aria-label="Close">×</button></div>
+      <label>Subject name<input name="name" required maxlength="50" placeholder="e.g. Mathematics"></label>
+      <p class="modal-hint">SAMORAQ uses your single daily study-time budget and distributes it across your subjects. No per-subject time is needed.</p>
+      <div class="modal-actions"><button type="button" class="secondary-button close-modal">Cancel</button><button type="submit" id="subjectSubmit" class="primary-button">Add subject</button></div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="priorityModal" aria-hidden="true">
+    <div class="modal panel priority-modal" role="dialog" aria-modal="true" aria-labelledby="priorityModalTitle">
+      <div class="modal-heading"><div class="modal-bot-intro"><img id="priorityModalBot" src="assets/studybot.png" alt="StudyBot"/><div><div class="eyebrow">PERSONALISED STUDY ALLOCATION</div><h2 id="priorityModalTitle">Set your subject priorities</h2></div></div><button type="button" class="icon-button close-modal" aria-label="Close">×</button></div>
+      <p class="modal-hint">Arrange subjects from highest to lowest priority. Higher-ranked subjects receive a larger share of your daily study budget. Your total daily hours stay unchanged.</p>
+      <div id="priorityList" class="priority-list"></div>
+      <div class="modal-actions"><button type="button" class="secondary-button close-modal">Cancel</button><button type="button" class="primary-button" id="savePriority">Save priority order</button></div>
+    </div>
+  </div>
+
+
+  <div class="modal-backdrop" id="dailyTopicModal" aria-hidden="true">
+    <form class="modal panel daily-topic-modal" id="dailyTopicForm" role="dialog" aria-modal="true" aria-labelledby="dailyTopicTitle">
+      <div class="modal-heading"><div class="modal-bot-intro"><img id="dailyTopicModalBot" src="assets/studybot.png" alt="StudyBot"/><div><div class="eyebrow">YOUR PLAN FOR TODAY</div><h2 id="dailyTopicTitle">What shall we study today?</h2></div></div><button type="button" class="icon-button close-modal" aria-label="Close">×</button></div>
+      <p class="modal-hint">Type the topics or chapters you want to study under each subject. I’ll arrange your sessions using your subject priorities and daily study-time budget.</p>
+      <div id="dailyTopicChoices" class="daily-topic-choices"></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="skipDailyTopics">Not now</button><button type="submit" class="primary-button">Build today’s plan</button></div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="topicModal" aria-hidden="true">
+    <form class="modal panel" id="topicForm">
+      <div class="modal-heading"><div><div class="eyebrow">DEFINE WHAT YOU'LL STUDY</div><h2>Add a topic</h2></div><button type="button" class="icon-button close-modal" aria-label="Close">×</button></div>
+      <label>Subject<select name="subject" id="topicSubject" required></select></label>
+      <label>Topic / chapter name<input name="title" required maxlength="100" placeholder="e.g. Applications of Derivatives"></label>
+      <p class="modal-hint">SAMORAQ distributes your single daily study budget across subjects and active topics. You decide when a topic is complete.</p>
+      <div class="modal-actions"><button type="button" class="secondary-button close-modal">Cancel</button><button type="submit" class="primary-button">Add topic</button></div>
+    </form>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <div class="victory-overlay" id="victoryOverlay" aria-hidden="true"><div class="confetti" id="confetti"></div><div class="victory-card"><div class="victory-bot"><img src="assets/studybot.png" alt="NEXUS, your SAMORAQ study companion"><div><strong>NEXUS</strong><span>Your SAMORAQ companion</span></div></div><div class="victory-icon">✦</div><div class="eyebrow">QUEST COMPLETE</div><h2>That's a win!</h2><p id="victoryTask">You finished a task.</p><div class="victory-xp">+<span id="victoryXp">25</span> XP</div><p class="victory-nexus-line">NEXUS: Brilliant work! Every focused effort counts. Keep building your momentum.</p><button class="primary-button" id="victoryClose">Keep going →</button></div></div>
+
+  <div id="authGate" class="auth-gate" hidden>
+    <div class="auth-card">
+      <div class="auth-brand"><span class="brand-mark">S</span><div><strong>SAMORAQ</strong><small>LEARN SMARTER. GROW STRONGER.</small></div></div>
+      <div class="auth-kicker">YOUR PERSONAL STUDY SPACE</div>
+      <h1 id="authTitle">Welcome back.</h1>
+      <p id="authIntro">Sign in or create an account on this device to build your study plan.</p>
+      <div class="auth-tabs"><button type="button" class="auth-tab active" id="showLogin">Log in</button><button type="button" class="auth-tab" id="showRegister">Create account</button></div>
+      <form id="loginForm" class="auth-form">
+        <label>Username<input name="username" autocomplete="username" required minlength="3" maxlength="24" placeholder="e.g. studywarrior"></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required minlength="4" placeholder="Your password"></label>
+        <button class="primary-button auth-submit" type="submit">Log in →</button>
+        <p class="auth-note">This account stays in this browser on this device.</p>
+        <p class="auth-error" id="loginError" role="alert"></p>
+      </form>
+      <form id="registerForm" class="auth-form" hidden>
+        <label>Display name<input name="displayName" required maxlength="40" placeholder="What should we call you?"></label>
+        <label>Create username<input name="username" autocomplete="username" required minlength="3" maxlength="24" pattern="[A-Za-z0-9_-]+" placeholder="letters, numbers, _ or -"></label>
+        <label>Create password<input name="password" type="password" autocomplete="new-password" required minlength="4" placeholder="At least 4 characters"></label>
+        <button class="primary-button auth-submit" type="submit">Create account →</button>
+        <p class="auth-note">Account details are stored in this browser and are not protected like a cloud account. Do not reuse a password from another service.</p>
+        <p class="auth-error" id="registerError" role="alert"></p>
+      </form>
+    </div>
+  </div>
+  <div id="onboardingGate" class="auth-gate" hidden>
+    <div class="auth-card onboarding-card">
+      <div class="auth-brand"><span class="brand-mark">S</span><div><strong>SAMORAQ</strong><small>LET'S BUILD YOUR PLAN</small></div></div>
+      <div class="auth-kicker">YOUR STUDY PROFILE</div>
+      <h1>Let's set you up.</h1>
+      <p>Finish your student profile and choose your subjects, daily study time, and topics before opening your planner.</p>
+      <form id="onboardingForm" class="auth-form">
+        <label>Country/region<select name="region"><option>India</option><option>Other</option></select></label>
+        <label>Board / curriculum<select name="board"><option>CBSE</option><option>ICSE</option><option>State board</option><option>Other</option></select></label>
+        <label>Class / grade<select name="grade"><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option selected>Class 12</option><option>College</option><option>Other</option></select></label>
+        <label>Study goal<select name="goal"><option>Board examinations</option><option>Competitive examinations</option><option>Boards + competitive exams</option><option>Daily study and homework</option></select></label>
+        <label>Target exam date (optional)<input name="examDate" type="date"></label>
+        <button class="primary-button auth-submit" type="submit">Build my study plan →</button>
+        <p class="auth-error" id="onboardingError" role="alert"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="cloud-bootstrap.js"></script>
+</body>
+</html>

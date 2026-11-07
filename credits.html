@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4b740">
+  <title>Credits & Bio — SAMORAQ</title>
+  <meta name="description" content="Meet the creator and learn the mission behind SAMORAQ.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body{background:#090d27;color:#f3f5ff}.bio-page{max-width:1120px;margin:0 auto;padding:34px 28px 60px}
+    .bio-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+    .back-link{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--text,#24243a);font-weight:700;padding:10px 14px;border:1px solid #29376d;border-radius:12px}
+    .bio-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:center;padding:clamp(22px,4vw,42px);border-radius:28px;background:linear-gradient(135deg,#18275b,#17113d);border:1px solid #34477e;overflow:hidden}
+    .bio-kicker{font-size:12px;letter-spacing:.16em;font-weight:800;color:#f4b740;text-transform:uppercase}
+    .bio-hero h1{font-size:clamp(34px,5vw,58px);line-height:1.03;margin:14px 0}
+    .bio-hero h1 span{color:#f4b740}
+    .bio-role{font-weight:800;font-size:16px;margin-bottom:16px}
+    .bio-lead{font-size:16px;line-height:1.8;max-width:620px;opacity:.86}
+    .bio-photo-wrap{position:relative}
+    .bio-photo{width:100%;display:block;aspect-ratio:4/4.1;object-fit:cover;object-position:center;border-radius:22px;box-shadow:0 24px 65px rgba(10,18,50,.25);border:1px solid rgba(255,255,255,.35)}
+    .photo-caption{font-size:12px;opacity:.7;margin:10px 4px 0}
+    .bio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:22px}
+    .bio-card{padding:24px;border:1px solid #29376d;border-radius:20px;background:#11183a}
+    .bio-card h2{margin:0 0 12px;font-size:20px}
+    .bio-card p{line-height:1.8;opacity:.85;margin:0}
+    .credit-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+    .credit-list li{display:flex;justify-content:space-between;gap:18px;padding-bottom:11px;border-bottom:1px solid var(--border,#e7e7f1)}
+    .credit-list li:last-child{border-bottom:0;padding-bottom:0}
+    .credit-list span{opacity:.7;text-align:right}
+    .bio-mission{margin-top:20px;padding:28px;border-radius:22px;background:linear-gradient(120deg,#17275b,#32185b);color:#fff}
+    .bio-mission h2{margin:0 0 10px}
+    .bio-mission p{font-size:18px;line-height:1.8;margin:0;max-width:850px;color:#e4e8ff}
+    .bio-footer{text-align:center;padding:28px 0 0;font-size:12px;opacity:.65}
+    @media(max-width:760px){.bio-page{padding:20px 14px 42px}.bio-hero{grid-template-columns:1fr}.bio-photo-wrap{max-width:440px}.bio-grid{grid-template-columns:1fr}.bio-hero h1{font-size:40px}}
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="credits-page dark">
+  <div class="bio-page">
+    <header class="bio-top">
+      <a class="brand" href="index.html" aria-label="SAMORAQ home">
+        <span class="brand-mark">S</span>
+        <span>STUDY<span class="brand-light">FORGE</span><small>LEARN SMARTER. GROW STRONGER.</small></span>
+      </a>
+      <a class="back-link" href="dashboard.html">← Back to dashboard</a>
+    </header>
+
+    <main>
+      <section class="bio-hero">
+        <div>
+          <div class="bio-kicker">HERE’S MY CREATOR AND FOUNDER OF THIS FIELD</div>
+          <h1><span>GAURAB SAHA.</span></h1>
+          <div class="bio-role">Founder · Creator · Builder of SAMORAQ</div>
+          <p class="bio-lead">I’m a student, creator, and technology enthusiast who enjoys turning ideas into practical projects. SAMORAQ began with a simple thought: studying can feel more manageable when goals are organised, progress is visible, and consistency is rewarded. This is an evolving project built around that idea.</p>
+        </div>
+        <div class="bio-photo-wrap">
+          <img class="bio-photo" src="assets/gaurab-saha-founder.png" alt="Professional founder portrait for Gaurab Saha">
+          <div class="photo-caption">Founder portrait · SAMORAQ</div>
+        </div>
+      </section>
+
+      <section class="bio-grid" aria-label="About and credits">
+        <article class="bio-card">
+          <h2>My story</h2>
+          <p>I’m interested in technology, design, problem-solving, and building things that can grow beyond an idea. SAMORAQ is one step in that journey: a place to experiment, learn from real use, and make a useful tool for students.</p>
+        </article>
+        <article class="bio-card">
+          <h2>Why SAMORAQ?</h2>
+          <p>Planning should help students get started—not overwhelm them. SAMORAQ combines tasks, subjects, schedules, progress tracking, and gamified rewards to make daily study goals easier to see and manage.</p>
+        </article>
+        <article class="bio-card">
+          <h2>Credits</h2>
+          <ul class="credit-list">
+            <li><strong>Founder</strong><span>Gaurab Saha</span></li>
+            <li><strong>Product</strong><span>SAMORAQ</span></li>
+            <li><strong>Release</strong><span>V2 · Evolving student planner</span></li>
+            <li><strong>Build</strong><span>HTML, CSS &amp; JavaScript</span></li>
+          </ul>
+        </article>
+        <article class="bio-card">
+          <h2>What comes next</h2>
+          <p>The current version is a starting point. Future possibilities include secure accounts, cloud synchronisation, richer analytics, and more reliable planning, verified curriculum coverage, and optional cloud sync when it is ready.</p>
+        </article>
+      </section>
+
+      <section class="bio-mission">
+        <h2>The mission</h2>
+        <p>To make studying more organised, engaging, and rewarding—helping students turn their goals into consistent progress, one task at a time.</p>
+      </section>
+    </main>
+    <footer class="bio-footer">SAMORAQ V2 · Learn Smarter · Grow Stronger</footer>
+  </div>
+
+<script>
+(() => {
+  document.body.classList.add("dark");
+})();
+</script>
+
+</body>
+</html>

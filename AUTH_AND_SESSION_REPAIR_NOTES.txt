@@ -1,0 +1,30 @@
+SAMORAQ — AUTHENTICATION AND SESSION RECOVERY UPDATE
+
+What changed
+- Returning users with an existing student_profiles record are routed to the dashboard even if student_app_state is missing or incomplete.
+- Dashboard bootstrap validates the active session against Supabase Auth before loading account data.
+- If cloud app state is missing, bootstrap first attempts to recover a valid local browser backup. If none exists, it creates a safe empty planner state instead of sending an established profile back to account creation.
+- Profile and study-state recovery writes use the verified authenticated user ID.
+- Onboarding now calls Supabase Auth getUser() immediately before writing cloud records.
+- New-account onboarding saves the profile row first, then the app-state row, so failures are reported accurately and do not obscure which write failed.
+- Cloud sync debouncing is tracked separately for profile and app-state keys to avoid one save cancelling the other.
+- Existing local and cloud study data are not intentionally cleared by this update.
+- The one-task-per-topic/subject-time-fit planner change is retained.
+
+Database
+- No schema migration is required for these code changes.
+- Keep the existing student_profiles.user_id -> auth.users.id foreign key and RLS policies.
+
+Deployment
+- Replace the deployed SAMORAQ project files with this package, preserving the folder structure and assets.
+- Hard-refresh the site after deployment.
+
+Validation performed
+- Node syntax checks: auth.js, cloud-bootstrap.js, app.js.
+- HTML parser checks: index.html, auth.html, dashboard.html, credits.html.
+- Static checks for session validation, returning-user routing, local-state recovery, and per-key cloud sync.
+- ZIP integrity check.
+
+Not performed
+- No live Supabase credentials were used to simulate signup/login.
+- No real browser session or production GitHub Pages deployment was performed.
